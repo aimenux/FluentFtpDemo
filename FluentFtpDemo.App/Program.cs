@@ -7,25 +7,35 @@ namespace FluentFtpDemo.App
 {
     internal class Program
     {
+        private const string Host = @"ftp_ip_adress";
+        private const string User = @"ftp_user";
+        private const string Pass = @"ftp_pass";
+
         private static void Main()
         {
+            // Add log file (static applied to all instances)
             FtpBuilder.AddFileListner(@"ftp.log");
+
+            // Example of ftp passive mode
             PassiveFtpModeExample();
+
+            // Example of ftps passive mode
             PassiveFtpsModeExample();
+
+            // Example of ftp active mode
             ActiveFtpModeExample();
+
+            // Example of ftps active mode
             ActiveFtpsModeExample();
         }
 
         private static void PassiveFtpModeExample()
         {
-            const string host = @"ftp_ip_adress";
-            const string user = @"ftp_user";
-            const string pass = @"ftp_pass";
             var builder = new FtpBuilder
             {
-                Host = host,
-                User = user,
-                Password = pass,
+                Host = Host,
+                User = User,
+                Password = Pass,
                 Type = FtpTypes.Passive
             };
             var service = new FtpService(builder);
@@ -35,14 +45,11 @@ namespace FluentFtpDemo.App
 
         private static void PassiveFtpsModeExample()
         {
-            const string host = @"ftp_ip_adress";
-            const string user = @"ftp_user";
-            const string pass = @"ftp_pass";
             var builder = new FtpBuilder
             {
-                Host = host,
-                User = user,
-                Password = pass,
+                Host = Host,
+                User = User,
+                Password = Pass,
                 Type = FtpTypes.Passive,
                 Policy = FtpPolicies.Accept
             };
@@ -53,14 +60,11 @@ namespace FluentFtpDemo.App
 
         private static void ActiveFtpModeExample()
         {
-            const string host = @"ftp_ip_adress";
-            const string user = @"ftp_user";
-            const string pass = @"ftp_pass";
             var builder = new FtpBuilder
             {
-                Host = host,
-                User = user,
-                Password = pass,
+                Host = Host,
+                User = User,
+                Password = Pass,
                 Type = FtpTypes.Active,
                 ActivePorts = new List<int> { 32490, 32491, 32492 }
             };
@@ -71,19 +75,16 @@ namespace FluentFtpDemo.App
 
         private static void ActiveFtpsModeExample()
         {
-            const string host = @"ftp_ip_adress";
-            const string user = @"ftp_user";
-            const string pass = @"ftp_pass";
             var builder = new FtpBuilder
             {
-                Host = host,
-                User = user,
-                Password = pass,
+                Host = Host,
+                User = User,
+                Password = Pass,
                 Type = FtpTypes.Active,
                 Policy = FtpPolicies.Accept,
                 ActivePorts = new List<int> { 32490, 32491, 32492 }
             };
-            var service = new FtpService(builder);
+            var service = new FtpService(builder) {FtpsEnabled = true};
             var items = service.GetListing();
             Console.WriteLine($"Items found : {items.Count}");
         }
