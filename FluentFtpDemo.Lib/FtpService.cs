@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using FluentFtpDemo.Lib.Constants;
 using FluentFtpDemo.Lib.Helpers;
 using FluentFtpDemo.Lib.Models;
 using FluentFTP;
@@ -16,10 +18,6 @@ namespace FluentFtpDemo.Lib
         #endregion
 
         #region constructors
-
-        public FtpService() : this(new FtpBuilder())
-        {
-        }
 
         public FtpService(IFtpBuilder builder)
         {
@@ -320,6 +318,28 @@ namespace FluentFtpDemo.Lib
             {
                 Logger.Log(ex);
                 return new List<FtpItem>();
+            }
+        }
+
+        public static bool AddFileListner(string file, SourceLevels level = FtpConstants.DefaultLevel)
+        {
+            if (string.IsNullOrWhiteSpace(file)) return false;
+            try
+            {
+                using (var listner = new TextWriterTraceListener(file))
+                {
+                    listner.Filter = new EventTypeFilter(level);
+                    FtpTrace.AddListener(listner);
+                    FtpTrace.LogUserName = true;
+                    FtpTrace.LogPassword = false;
+                    FtpTrace.LogIP = true;
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+                return false;
             }
         }
 

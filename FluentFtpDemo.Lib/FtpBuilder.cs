@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net;
 using System.Net.Security;
 using System.Security.Authentication;
@@ -67,28 +66,6 @@ namespace FluentFtpDemo.Lib
             {
                 Logger.Log(ex);
                 return null;
-            }
-        }
-
-        public static bool AddFileListner(string file, SourceLevels level = FtpConstants.DefaultLevel)
-        {
-            if (string.IsNullOrWhiteSpace(file)) return false;
-            try
-            {
-                using (var listner = new TextWriterTraceListener(file))
-                {
-                    listner.Filter = new EventTypeFilter(level);
-                    FtpTrace.AddListener(listner);
-                    FtpTrace.LogUserName = true;
-                    FtpTrace.LogPassword = false;
-                    FtpTrace.LogIP = true;
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger.Log(ex);
-                return false;
             }
         }
 

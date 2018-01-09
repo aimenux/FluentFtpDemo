@@ -14,7 +14,7 @@ namespace FluentFtpDemo.App
         private static void Main()
         {
             // Add log file (static applied to all instances)
-            FtpBuilder.AddFileListner(@"ftp.log");
+            FtpService.AddFileListner(@"ftp.log");
 
             // Example of ftp passive mode
             PassiveFtpModeExample();
