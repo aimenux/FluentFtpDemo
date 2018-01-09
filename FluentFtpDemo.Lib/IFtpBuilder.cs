@@ -12,7 +12,7 @@ namespace FluentFtpDemo.Lib
         string User { get; set; }
         string Password { get; set; }
         FtpTypes Type { get; set; }
-        FtpStrategies Strategy { get; set; }
+        FtpPolicies Policy { get; set; }
         ICollection<int> ActivePorts { get; set; }
         FtpClient BuildClient(bool secure = false);
     }

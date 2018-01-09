@@ -1,6 +1,6 @@
 ﻿namespace FluentFtpDemo.Lib.Enumerations
 {
-    public enum FtpStrategies
+    public enum FtpPolicies
     {
         Accept, // accept any certificate
         Refuse, // reject any certificate

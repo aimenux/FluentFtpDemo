@@ -9,6 +9,6 @@ namespace FluentFtpDemo.Lib.Constants
         public const int DefaultTimeout = 10;
         public const FtpTypes DefaultType = FtpTypes.Passive;
         public const SourceLevels DefaultLevel = SourceLevels.All;
-        public const FtpStrategies DefaultStrategy = FtpStrategies.Verify;
+        public const FtpPolicies DefaultPolicy = FtpPolicies.Verify;
     }
 }

@@ -9,6 +9,7 @@ namespace FluentFtpDemo.App
     {
         private static void Main()
         {
+            FtpBuilder.AddFileListner(@"ftp.log");
             PassiveFtpModeExample();
             PassiveFtpsModeExample();
             ActiveFtpModeExample();
@@ -43,7 +44,7 @@ namespace FluentFtpDemo.App
                 User = user,
                 Password = pass,
                 Type = FtpTypes.Passive,
-                Strategy = FtpStrategies.Accept
+                Policy = FtpPolicies.Accept
             };
             var service = new FtpService(builder) {FtpsEnabled = true};
             var items = service.GetListing();
@@ -79,7 +80,7 @@ namespace FluentFtpDemo.App
                 User = user,
                 Password = pass,
                 Type = FtpTypes.Active,
-                Strategy = FtpStrategies.Accept,
+                Policy = FtpPolicies.Accept,
                 ActivePorts = new List<int> { 32490, 32491, 32492 }
             };
             var service = new FtpService(builder);

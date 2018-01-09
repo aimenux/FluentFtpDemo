@@ -22,7 +22,7 @@ namespace FluentFtpDemo.Lib
         public string User { get; set; }
         public string Password { get; set; }
         public FtpTypes Type { get; set; }
-        public FtpStrategies Strategy { get; set; }
+        public FtpPolicies Policy { get; set; }
         public ICollection<int> ActivePorts { get; set; }
 
         #endregion
@@ -36,7 +36,7 @@ namespace FluentFtpDemo.Lib
         public FtpBuilder(int retry, int timeout)
         {
             Type = FtpConstants.DefaultType;
-            Strategy = FtpConstants.DefaultStrategy;
+            Policy = FtpConstants.DefaultPolicy;
             Retry = retry > 0 ? retry : FtpConstants.DefaultRetry;
             Timeout = timeout > 0 ? timeout : FtpConstants.DefaultTimeout;
         }
@@ -94,22 +94,22 @@ namespace FluentFtpDemo.Lib
 
         private void OnValidateCertificate(FtpClient control, FtpSslValidationEventArgs e)
         {
-            switch (Strategy)
+            switch (Policy)
             {
-                case FtpStrategies.Accept:
+                case FtpPolicies.Accept:
                     e.Accept = true;
                     break;
-                case FtpStrategies.Refuse:
+                case FtpPolicies.Refuse:
                     e.Accept = false;
                     break;
-                case FtpStrategies.Verify:
+                case FtpPolicies.Verify:
                     e.Accept = Verify(e);
                     break;
-                case FtpStrategies.Prompt:
+                case FtpPolicies.Prompt:
                     e.Accept = Verify(e, true);
                     break;
                 default:
-                    var msg = $"Unexpected strategy [{Strategy}]";
+                    var msg = $"Unexpected strategy [{Policy}]";
                     throw new ArgumentOutOfRangeException(msg);
             }
         }
