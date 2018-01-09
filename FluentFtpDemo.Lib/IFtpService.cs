@@ -4,7 +4,7 @@ using FluentFtpDemo.Lib.Models;
 
 namespace FluentFtpDemo.Lib
 {
-    public interface IFtpProvider
+    public interface IFtpService
     {
         bool FtpsEnabled { get; set; }
         bool CheckConnectionStatus();

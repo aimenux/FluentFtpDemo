@@ -55,7 +55,7 @@
     <Compile Include="FtpBuilder.cs" />
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Models\FtpItem.cs" />
-    <Compile Include="FtpProvider.cs" />
+    <Compile Include="FtpService.cs" />
     <Compile Include="IFtpBuilder.cs" />
     <Compile Include="IFtpService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

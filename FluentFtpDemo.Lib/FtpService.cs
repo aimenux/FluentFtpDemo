@@ -7,7 +7,7 @@ using FluentFTP;
 
 namespace FluentFtpDemo.Lib
 {
-    public class FtpProvider : IFtpProvider
+    public class FtpService : IFtpService
     {
         #region fields
 
@@ -17,11 +17,11 @@ namespace FluentFtpDemo.Lib
 
         #region constructors
 
-        public FtpProvider() : this(new FtpBuilder())
+        public FtpService() : this(new FtpBuilder())
         {
         }
 
-        public FtpProvider(IFtpBuilder builder)
+        public FtpService(IFtpBuilder builder)
         {
             _ftpBuilder = builder;
         }
