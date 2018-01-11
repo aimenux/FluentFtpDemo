@@ -17,7 +17,7 @@ namespace FluentFtpDemo.Lib
         bool UploadFile(string local, string remote);
         bool DownloadFile(string local, string remote);
         bool SetModifiedTime(string remote, DateTime date);
-        ICollection<FtpItem> GetListing(string remote = @"/");
+        ICollection<FtpItem> GetListing(string remote = null);
         int UploadFiles(string[] localFiles, string remoteDir);
         int DownloadFiles(string localDir, string[] remoteFiles);
     }

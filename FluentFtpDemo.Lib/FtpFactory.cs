@@ -23,6 +23,7 @@ namespace FluentFtpDemo.Lib
         public FtpTypes Type { get; set; }
         public FtpModes Mode { get; set; }
         public FtpPolicies Policy { get; set; }
+        public string WorkingDirectory { get; set; }
         public ICollection<int> ActivePorts { get; set; }
 
         #endregion
@@ -38,6 +39,7 @@ namespace FluentFtpDemo.Lib
             Type = FtpConstants.DefaultType;
             Mode = FtpConstants.DefaultMode;
             Policy = FtpConstants.DefaultPolicy;
+            WorkingDirectory = FtpConstants.DefaultDirectory;
             Retry = retry > 0 ? retry : FtpConstants.DefaultRetry;
             Timeout = 1000 * (timeout > 0 ? timeout : FtpConstants.DefaultTimeout);
         }
@@ -59,6 +61,7 @@ namespace FluentFtpDemo.Lib
                     RetryAttempts = Retry
                 };
 
+                client.SetWorkingDirectory(WorkingDirectory);
                 if (Type == FtpTypes.Ftp) return client;
                 client.SslProtocols = SslProtocols.Tls;
                 client.EncryptionMode = FtpEncryptionMode.Explicit;
@@ -104,16 +107,16 @@ namespace FluentFtpDemo.Lib
             return certificate.Verify();
         }
 
-        private static FtpDataConnectionType GetConnectionType(FtpModes type)
+        private static FtpDataConnectionType GetConnectionType(FtpModes mode)
         {
-            switch (type)
+            switch (mode)
             {
                 case FtpModes.Active:
                     return FtpDataConnectionType.AutoActive;
                 case FtpModes.Passive:
                     return FtpDataConnectionType.AutoPassive;
                 default:
-                    var msg = $"Unexpected connection type [{type}]";
+                    var msg = $"Unexpected connection mode [{mode}]";
                     throw new ArgumentOutOfRangeException(msg);
             }
         }

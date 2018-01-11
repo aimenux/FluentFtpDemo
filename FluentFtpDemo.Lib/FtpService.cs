@@ -296,14 +296,15 @@ namespace FluentFtpDemo.Lib
             }
         }
 
-        public ICollection<FtpItem> GetListing(string remote = "/")
+        public ICollection<FtpItem> GetListing(string remote = null)
         {
             try
             {
+                var path = remote ?? _ftpFactory.WorkingDirectory;
                 using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
-                    var items = client.GetListing(remote);
+                    var items = client.GetListing(path);
                     client.Disconnect();
                     return ToFtpItems(items);
                 }

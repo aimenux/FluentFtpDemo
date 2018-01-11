@@ -7,6 +7,7 @@ namespace FluentFtpDemo.Lib.Constants
     {
         public const int DefaultRetry = 3;
         public const int DefaultTimeout = 10;
+        public const string DefaultDirectory = @"/";
         public const FtpTypes DefaultType = FtpTypes.Ftp;
         public const FtpModes DefaultMode = FtpModes.Passive;
         public const SourceLevels DefaultLevel = SourceLevels.All;

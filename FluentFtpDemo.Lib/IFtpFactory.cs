@@ -14,6 +14,7 @@ namespace FluentFtpDemo.Lib
         FtpTypes Type { get; set; }
         FtpModes Mode { get; set; }
         FtpPolicies Policy { get; set; }
+        string WorkingDirectory { get; set; }
         ICollection<int> ActivePorts { get; set; }
         FtpClient BuildClient();
     }
