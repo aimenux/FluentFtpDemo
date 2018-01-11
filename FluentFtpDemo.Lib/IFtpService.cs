@@ -7,14 +7,12 @@ namespace FluentFtpDemo.Lib
     public interface IFtpService
     {
         bool CheckConnectionStatus();
-        string GetWorkingDirectory();
         bool FileExists(string remote);
         bool DeleteFile(string remote);
         long GetFileSize(string remote);
         bool DirectorExists(string remote);
         bool CreateDirectory(string remote);
         bool DeleteDirectory(string remote);
-        bool SetWorkingDirectory(string remote);
         DateTime? GetModifiedTime(string remote);
         bool UploadFile(string local, string remote);
         bool DownloadFile(string local, string remote);
