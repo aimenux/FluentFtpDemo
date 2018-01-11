@@ -6,7 +6,6 @@ namespace FluentFtpDemo.Lib
 {
     public interface IFtpService
     {
-        bool FtpsEnabled { get; set; }
         bool CheckConnectionStatus();
         bool FileExists(string remote);
         bool DeleteFile(string remote);

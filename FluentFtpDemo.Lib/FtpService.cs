@@ -13,22 +13,16 @@ namespace FluentFtpDemo.Lib
     {
         #region fields
 
-        private readonly IFtpBuilder _ftpBuilder;
+        private readonly IFtpFactory _ftpFactory;
 
         #endregion
 
         #region constructors
 
-        public FtpService(IFtpBuilder builder)
+        public FtpService(IFtpFactory factory)
         {
-            _ftpBuilder = builder;
+            _ftpFactory = factory;
         }
-
-        #endregion
-
-        #region properties
-
-        public bool FtpsEnabled { get; set; }
 
         #endregion
 
@@ -38,7 +32,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     client.Disconnect();
@@ -56,7 +50,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.FileExists(remote);
@@ -75,7 +69,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     client.DeleteFile(remote);
@@ -95,7 +89,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.GetFileSize(remote);
@@ -114,7 +108,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.DirectoryExists(remote);
@@ -133,7 +127,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     client.CreateDirectory(remote);
@@ -153,7 +147,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     client.DeleteDirectory(remote);
@@ -173,7 +167,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.GetModifiedTime(remote);
@@ -192,7 +186,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.UploadFile(local, remote);
@@ -211,7 +205,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.UploadFiles(localFiles, remoteDir);
@@ -230,7 +224,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.DownloadFile(local, remote);
@@ -249,7 +243,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     client.SetModifiedTime(remote, date);
@@ -268,7 +262,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var res = client.DownloadFiles(localDir, remoteFiles);
@@ -287,7 +281,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     client.Rename(oldRemote, newRemote);
@@ -306,7 +300,7 @@ namespace FluentFtpDemo.Lib
         {
             try
             {
-                using (var client = _ftpBuilder.BuildClient(FtpsEnabled))
+                using (var client = _ftpFactory.BuildClient())
                 {
                     client.Connect();
                     var items = client.GetListing(remote);

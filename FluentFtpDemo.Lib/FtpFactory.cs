@@ -11,7 +11,7 @@ using FluentFtpDemo.Lib.Helpers;
 
 namespace FluentFtpDemo.Lib
 {
-    public class FtpBuilder : IFtpBuilder
+    public class FtpFactory : IFtpFactory
     {
         #region properties
 
@@ -21,6 +21,7 @@ namespace FluentFtpDemo.Lib
         public string User { get; set; }
         public string Password { get; set; }
         public FtpTypes Type { get; set; }
+        public FtpModes Mode { get; set; }
         public FtpPolicies Policy { get; set; }
         public ICollection<int> ActivePorts { get; set; }
 
@@ -28,13 +29,14 @@ namespace FluentFtpDemo.Lib
 
         #region constructors
 
-        public FtpBuilder() : this(FtpConstants.DefaultRetry, FtpConstants.DefaultTimeout)
+        public FtpFactory() : this(FtpConstants.DefaultRetry, FtpConstants.DefaultTimeout)
         {
         }
 
-        public FtpBuilder(int retry, int timeout)
+        public FtpFactory(int retry, int timeout)
         {
             Type = FtpConstants.DefaultType;
+            Mode = FtpConstants.DefaultMode;
             Policy = FtpConstants.DefaultPolicy;
             Retry = retry > 0 ? retry : FtpConstants.DefaultRetry;
             Timeout = timeout > 0 ? timeout : FtpConstants.DefaultTimeout;
@@ -44,19 +46,20 @@ namespace FluentFtpDemo.Lib
 
         #region methods
 
-        public FtpClient BuildClient(bool secure = false)
+        public FtpClient BuildClient()
         {
             try
             {
                 var client = new FtpClient(Host)
                 {
                     Credentials = new NetworkCredential(User, Password),
-                    DataConnectionType = GetConnectionType(Type),
+                    DataConnectionType = GetConnectionType(Mode),
                     ActivePorts = ActivePorts,
                     ConnectTimeout = Timeout,
                     RetryAttempts = Retry
                 };
-                if (!secure) return client;
+
+                if (Type == FtpTypes.Ftp) return client;
                 client.SslProtocols = SslProtocols.Tls;
                 client.EncryptionMode = FtpEncryptionMode.Explicit;
                 client.ValidateCertificate += OnValidateCertificate;
@@ -101,13 +104,13 @@ namespace FluentFtpDemo.Lib
             return certificate.Verify();
         }
 
-        private static FtpDataConnectionType GetConnectionType(FtpTypes type)
+        private static FtpDataConnectionType GetConnectionType(FtpModes type)
         {
             switch (type)
             {
-                case FtpTypes.Active:
+                case FtpModes.Active:
                     return FtpDataConnectionType.AutoActive;
-                case FtpTypes.Passive:
+                case FtpModes.Passive:
                     return FtpDataConnectionType.AutoPassive;
                 default:
                     var msg = $"Unexpected connection type [{type}]";

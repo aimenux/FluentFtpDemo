@@ -52,11 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enumerations\FtpTypes.cs" />
-    <Compile Include="FtpBuilder.cs" />
+    <Compile Include="Enumerations\FtpModes.cs" />
+    <Compile Include="FtpFactory.cs" />
     <Compile Include="Helpers\Logger.cs" />
     <Compile Include="Models\FtpItem.cs" />
     <Compile Include="FtpService.cs" />
-    <Compile Include="IFtpBuilder.cs" />
+    <Compile Include="IFtpFactory.cs" />
     <Compile Include="IFtpService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Constants\FtpConstants.cs" />

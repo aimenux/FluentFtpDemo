@@ -1,8 +1,8 @@
 ﻿namespace FluentFtpDemo.Lib.Enumerations
 {
-    public enum FtpTypes
+    public enum FtpModes
     {
-        Ftp,
-        Ftps
+        Active,
+        Passive
     }
 }
