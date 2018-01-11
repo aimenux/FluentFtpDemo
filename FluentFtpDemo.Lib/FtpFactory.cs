@@ -39,7 +39,7 @@ namespace FluentFtpDemo.Lib
             Mode = FtpConstants.DefaultMode;
             Policy = FtpConstants.DefaultPolicy;
             Retry = retry > 0 ? retry : FtpConstants.DefaultRetry;
-            Timeout = timeout > 0 ? timeout : FtpConstants.DefaultTimeout;
+            Timeout = 1000 * (timeout > 0 ? timeout : FtpConstants.DefaultTimeout);
         }
 
         #endregion

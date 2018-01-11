@@ -46,6 +46,25 @@ namespace FluentFtpDemo.Lib
             }
         }
 
+        public string GetWorkingDirectory()
+        {
+            try
+            {
+                using (var client = _ftpFactory.BuildClient())
+                {
+                    client.Connect();
+                    var res = client.GetWorkingDirectory();
+                    client.Disconnect();
+                    return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+                return null;
+            }
+        }
+
         public bool FileExists(string remote)
         {
             try
@@ -154,6 +173,25 @@ namespace FluentFtpDemo.Lib
                     var res = !client.DirectoryExists(remote);
                     client.Disconnect();
                     return res;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Log(ex);
+                return false;
+            }
+        }
+
+        public bool SetWorkingDirectory(string remote)
+        {
+            try
+            {
+                using (var client = _ftpFactory.BuildClient())
+                {
+                    client.Connect();
+                    client.SetWorkingDirectory(remote);
+                    client.Disconnect();
+                    return true;
                 }
             }
             catch (Exception ex)
