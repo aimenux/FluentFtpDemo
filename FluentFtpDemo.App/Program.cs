@@ -31,7 +31,7 @@ namespace FluentFtpDemo.App
 
         private static void PassiveFtpModeExample()
         {
-            var builder = new FtpFactory
+            var factory = new FtpFactory
             {
                 Host = Host,
                 User = User,
@@ -39,14 +39,14 @@ namespace FluentFtpDemo.App
                 Type = FtpTypes.Ftp,
                 Mode = FtpModes.Passive
             };
-            var service = new FtpService(builder);
+            var service = new FtpService(factory);
             var items = service.GetListing();
             Console.WriteLine($"Items found : {items.Count}");
         }
 
         private static void PassiveFtpsModeExample()
         {
-            var builder = new FtpFactory
+            var factory = new FtpFactory
             {
                 Host = Host,
                 User = User,
@@ -55,14 +55,14 @@ namespace FluentFtpDemo.App
                 Mode = FtpModes.Passive,
                 Policy = FtpPolicies.Accept
             };
-            var service = new FtpService(builder);
+            var service = new FtpService(factory);
             var items = service.GetListing();
             Console.WriteLine($"Items found : {items.Count}");
         }
 
         private static void ActiveFtpModeExample()
         {
-            var builder = new FtpFactory
+            var factory = new FtpFactory
             {
                 Host = Host,
                 User = User,
@@ -71,14 +71,14 @@ namespace FluentFtpDemo.App
                 Mode = FtpModes.Active,
                 ActivePorts = new List<int> { 32490, 32491, 32492 }
             };
-            var service = new FtpService(builder);
+            var service = new FtpService(factory);
             var items = service.GetListing();
             Console.WriteLine($"Items found : {items.Count}");
         }
 
         private static void ActiveFtpsModeExample()
         {
-            var builder = new FtpFactory
+            var factory = new FtpFactory
             {
                 Host = Host,
                 User = User,
@@ -88,7 +88,7 @@ namespace FluentFtpDemo.App
                 Policy = FtpPolicies.Accept,
                 ActivePorts = new List<int> { 32490, 32491, 32492 }
             };
-            var service = new FtpService(builder);
+            var service = new FtpService(factory);
             var items = service.GetListing();
             Console.WriteLine($"Items found : {items.Count}");
         }
